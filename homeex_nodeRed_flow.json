@@ -1,0 +1,607 @@
+[
+    {
+        "id": "0518dcbd19df8c72",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3543eb3577bb6c36",
+        "type": "websocket in",
+        "z": "0518dcbd19df8c72",
+        "name": "",
+        "server": "bb7222e644fad5ad",
+        "client": "",
+        "x": 250,
+        "y": 60,
+        "wires": [
+            [
+                "e4f8ee6973b6f991"
+            ]
+        ]
+    },
+    {
+        "id": "e4f8ee6973b6f991",
+        "type": "json",
+        "z": "0518dcbd19df8c72",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 510,
+        "y": 60,
+        "wires": [
+            [
+                "ed4759ea1f0df588"
+            ]
+        ]
+    },
+    {
+        "id": "896c066fa086932b",
+        "type": "switch",
+        "z": "0518dcbd19df8c72",
+        "name": "",
+        "property": "payload.slots.state",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 390,
+        "y": 540,
+        "wires": [
+            [
+                "2713a03f63e29696"
+            ],
+            [
+                "40c7d6f711654c61"
+            ]
+        ]
+    },
+    {
+        "id": "7d0cf7dc3a992edf",
+        "type": "change",
+        "z": "0518dcbd19df8c72",
+        "name": "msg to nodeMcu",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 910,
+        "y": 480,
+        "wires": [
+            [
+                "17718a4e2ddbdd22"
+            ]
+        ]
+    },
+    {
+        "id": "9d51da47442ddb86",
+        "type": "change",
+        "z": "0518dcbd19df8c72",
+        "name": "msg to nodeMcu",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 910,
+        "y": 600,
+        "wires": [
+            [
+                "17718a4e2ddbdd22"
+            ]
+        ]
+    },
+    {
+        "id": "2713a03f63e29696",
+        "type": "change",
+        "z": "0518dcbd19df8c72",
+        "name": "turning lamp on",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "okey sir, i'm turning on living room lamp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 480,
+        "wires": [
+            [
+                "5f1f3688bc631ac3",
+                "c00eddbf8783ac5d"
+            ]
+        ]
+    },
+    {
+        "id": "5f1f3688bc631ac3",
+        "type": "http request",
+        "z": "0518dcbd19df8c72",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://172.17.0.1:12101/api/text-to-speech",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 750,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "40c7d6f711654c61",
+        "type": "change",
+        "z": "0518dcbd19df8c72",
+        "name": "turning lamp off",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "okey sir, i'm turning off living room lamp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 600,
+        "wires": [
+            [
+                "5f1f3688bc631ac3",
+                "5c900e0da68b4276"
+            ]
+        ]
+    },
+    {
+        "id": "5c900e0da68b4276",
+        "type": "delay",
+        "z": "0518dcbd19df8c72",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 740,
+        "y": 600,
+        "wires": [
+            [
+                "9d51da47442ddb86"
+            ]
+        ]
+    },
+    {
+        "id": "c00eddbf8783ac5d",
+        "type": "delay",
+        "z": "0518dcbd19df8c72",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 740,
+        "y": 480,
+        "wires": [
+            [
+                "7d0cf7dc3a992edf"
+            ]
+        ]
+    },
+    {
+        "id": "ed4759ea1f0df588",
+        "type": "switch",
+        "z": "0518dcbd19df8c72",
+        "name": "",
+        "property": "payload.intent.name",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "GetTime",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "GetDate",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "askJoke",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "GetTemperature",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "GetHumidity",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ChangeLightState",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 6,
+        "x": 310,
+        "y": 300,
+        "wires": [
+            [
+                "ae4a0db3a9a84bbc"
+            ],
+            [
+                "ef7d10edda0b0a2f"
+            ],
+            [
+                "3c6a5e99edaacbf1"
+            ],
+            [
+                "5d8fd5f3b7674fab"
+            ],
+            [
+                "f1a2b83a110e6b79"
+            ],
+            [
+                "896c066fa086932b"
+            ]
+        ]
+    },
+    {
+        "id": "985c89cf8e67a7e8",
+        "type": "http request",
+        "z": "0518dcbd19df8c72",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://172.17.0.1:12101/api/text-to-speech",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1190,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "17718a4e2ddbdd22",
+        "type": "mqtt out",
+        "z": "0518dcbd19df8c72",
+        "name": "",
+        "topic": "homeex/nodemcu",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "3df9b6211d8c9bb6",
+        "x": 1190,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "6cde20f17b9e096f",
+        "type": "mqtt in",
+        "z": "0518dcbd19df8c72",
+        "name": "",
+        "topic": "homeex/temperature",
+        "qos": "2",
+        "datatype": "utf8",
+        "broker": "3df9b6211d8c9bb6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 730,
+        "y": 40,
+        "wires": [
+            [
+                "5141be7a812fd507"
+            ]
+        ]
+    },
+    {
+        "id": "b12f7120d0c0dd9a",
+        "type": "mqtt in",
+        "z": "0518dcbd19df8c72",
+        "name": "",
+        "topic": "homeex/humidity",
+        "qos": "2",
+        "datatype": "utf8",
+        "broker": "3df9b6211d8c9bb6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 720,
+        "y": 100,
+        "wires": [
+            [
+                "34ffa7788f2bb7a0"
+            ]
+        ]
+    },
+    {
+        "id": "5141be7a812fd507",
+        "type": "change",
+        "z": "0518dcbd19df8c72",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload & \" degree celsius\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 40,
+        "wires": [
+            [
+                "985c89cf8e67a7e8"
+            ]
+        ]
+    },
+    {
+        "id": "34ffa7788f2bb7a0",
+        "type": "change",
+        "z": "0518dcbd19df8c72",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload & \" percent\"",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 100,
+        "wires": [
+            [
+                "985c89cf8e67a7e8"
+            ]
+        ]
+    },
+    {
+        "id": "5d8fd5f3b7674fab",
+        "type": "change",
+        "z": "0518dcbd19df8c72",
+        "name": "GetTemperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "T",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 360,
+        "wires": [
+            [
+                "17718a4e2ddbdd22"
+            ]
+        ]
+    },
+    {
+        "id": "f1a2b83a110e6b79",
+        "type": "change",
+        "z": "0518dcbd19df8c72",
+        "name": "GetHumidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "H",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 930,
+        "y": 400,
+        "wires": [
+            [
+                "17718a4e2ddbdd22"
+            ]
+        ]
+    },
+    {
+        "id": "ae4a0db3a9a84bbc",
+        "type": "exec",
+        "z": "0518dcbd19df8c72",
+        "command": "TZ=\"Europe/Berlin\" date +\"it's %H %M\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Timestamp",
+        "x": 930,
+        "y": 160,
+        "wires": [
+            [
+                "985c89cf8e67a7e8"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "ef7d10edda0b0a2f",
+        "type": "exec",
+        "z": "0518dcbd19df8c72",
+        "command": " TZ=\"Europe/Berlin\" date +\"Today is %A %d %B %Y\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Date",
+        "x": 950,
+        "y": 220,
+        "wires": [
+            [
+                "985c89cf8e67a7e8"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "3c6a5e99edaacbf1",
+        "type": "function",
+        "z": "0518dcbd19df8c72",
+        "name": "Jokes",
+        "func": "var jokes = [\"I'm tired of following my dreams. I'm just going to ask them where they are going and meet up with them later.\", \"Did you hear about the guy whose whole left side was cut off? He's all right now.\", 'Why didn’t the skeleton cross the road? Because he had no guts.', \"What did one nut say as he chased another nut?  I'm a cashew!\", 'Where do fish keep their money? In the riverbank', 'I accidentally took my cats meds last night. Don’t ask meow.', \"Chances are if you' ve seen one shopping center, you've seen a mall.\", 'Dermatologists are always in a hurry. They spend all day making rash decisions. ', \"I knew I shouldn't steal a mixer from work, but it was a whisk I was willing to take.\", 'I won an argument with a weather forecaster once. His logic was cloudy...', 'How come the stadium got hot after the game? Because all of the fans left.', '\"Why do seagulls fly over the ocean?\" \"Because if they flew over the bay, we\\'d call them bagels.\"', 'Why was it called the dark ages? Because of all the knights. ', 'A steak pun is a rare medium well done.', 'Why did the tomato blush? Because it saw the salad dressing.', 'Did you hear the joke about the wandering nun? She was a roman catholic.', 'What creature is smarter than a talking parrot? A spelling bee.', \"I'll tell you what often gets over looked... garden fences.\", 'Why did the kid cross the playground? To get to the other slide.', \"Why do birds fly south for the winter? Because it's too far to walk.\", \"What is a centipedes's favorite Beatle song?  I want to hold your hand, hand, hand, hand...\", 'My first time using an elevator was an uplifting experience. The second time let me down.', \"To be Frank, I'd have to change my name.\", 'Slept like a log last night … woke up in the fireplace.', 'What do you call a female snake. misssssssss ', \"Why does a Moon-rock taste better than an Earth-rock? Because it's a little meteor.\", 'I thought my wife was joking when she said she\\'d leave me if I didn\\'t stop signing \"I\\'m A Believer\"... Then I saw her face.', 'I’m only familiar with 25 letters in the English language. I don’t know why.', 'What do you call two barracuda fish?  A Pairacuda!', 'What did the father tomato say to the baby tomato whilst on a family walk? Ketchup.']\n\nmsg.payload = jokes[Math.floor(Math.random()*jokes.length)]\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 280,
+        "wires": [
+            [
+                "985c89cf8e67a7e8"
+            ]
+        ]
+    },
+    {
+        "id": "bb7222e644fad5ad",
+        "type": "websocket-listener",
+        "path": "ws://172.17.0.1:12101/api/events/intent",
+        "wholemsg": "false"
+    },
+    {
+        "id": "3df9b6211d8c9bb6",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "172.17.0.1",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
